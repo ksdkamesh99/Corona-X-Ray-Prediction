@@ -26,7 +26,7 @@ def images(img):
     image_read=[]
     image1=image.load_img(img)
     image2=image.img_to_array(image1)
-    image3=transform.resize(image2,(250,250,3),anti_aliasing=True)
+    image3=transform.resize(image2,(224,224,3),anti_aliasing=True)
     image4=image3/255
     image_read.append(image4)
     img_array=np.asarray(image_read)
