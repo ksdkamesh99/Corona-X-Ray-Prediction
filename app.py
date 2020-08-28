@@ -26,7 +26,7 @@ def images(img):
     image_read=[]
     image1=image.load_img(img)
     image2=image.img_to_array(image1)
-    image3=transform.resize(image2,(224,224,3),anti_aliasing=True)
+    image3=transform.resize(image2,(200,200,3),anti_aliasing=True)
     image4=image3/255
     image_read.append(image4)
     img_array=np.asarray(image_read)
@@ -61,15 +61,21 @@ def xray():
       cure=lis[1]
       death=lis[2]
       if request.method=='POST':
-        img=request.files['ima']
-        imgarray=images(img)
+        img=request.files['ima'].read()
+        print(img)
+        npimg = np.fromstring(img, np.uint8)
+        # convert numpy array to image
+        img = cv2.imdecode(npimg,cv2.IMREAD_COLOR)
+        image3=cv2.resize(img,(200,200))
+        image = np.expand_dims(image3, axis=0)
+        imgarray=image/255
         print(imgarray)
         u=model.predict(imgarray)
         pre=processesing(u)
-        if pre==0:
+        if pre==1:
             print(0)
             return render_template("index.html",predict="You are confirmed as Covid positive",total=total,cure=cure,death=death)
-        if pre==1:
+        if pre==0:
             print(1)
             return render_template("index.html",predict="You are confirmed as Covid negetive",total=total,cure=cure,death=death)
       if request.method=='GET':
