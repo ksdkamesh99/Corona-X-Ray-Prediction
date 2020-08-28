@@ -1,10 +1,11 @@
-from bs4 import BeautifulSoup
+from bs4 import BeautifulSoup,Comment
 import requests
 import json
 import jsons as j
 import matplotlib.pyplot as plt
 import operator
 import numpy
+import html
 
 def web():
     
@@ -16,16 +17,17 @@ def web():
         return int(a)
     list=[]
 
-    response=requests.get("https://www.mohfw.gov.in/").content
+    response=requests.get("https://covidindia.org/").content
 
     soup = BeautifulSoup(response, 'html5lib')
-    table=soup.findAll("tr")
+    table=soup.findAll('table')[0].findAll('tr')
     header=table[0].find_all('th')
     head=[]
     for i in header:
         head.append(i.text)
     
     list.append(head)
+    
     for rows in table[1:]:
         u=[]
         tds=rows.find_all('td')
@@ -34,7 +36,7 @@ def web():
         list.append(u)
     past=j.load()
     print(list)
-    curr={x[1]:x[2:] for x in list[1:-2]}
+    curr={x[0]:x[1:] for x in list[1:-1]}
     print(curr)
     j.save(curr)
     changed=False
@@ -44,9 +46,11 @@ def web():
             past[states]=['0','0','0','0']
     states=[x for x in curr.keys()]
     states=states[:-1]
+    print(states)
     data_total=[int(curr[x][0]) for x in states]
     data_cure=[int(curr[x][1]) for x in states]
     data_death=[int(curr[x][2]) for x in states]
+    
     b={}
     for i in range(0,len(states)):
         b[states[i]]=data_total[i]
@@ -79,6 +83,7 @@ def web():
     total=sum(data_total)
     death=sum(data_death)
     cure=sum(data_cure)
+    print(len(data_total))
     li=[total,cure,death]
     print(li)
     return li       
