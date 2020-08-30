@@ -1,20 +1,16 @@
 from flask import Flask,render_template,request,send_file
 import numpy as np
-import pandas as pd
-import sklearn.metrics as m
-from keras.utils.np_utils import to_categorical
-import os
+
 import cv2
-from sklearn.model_selection import train_test_split
-from keras.models import Sequential
-import keras.backend.tensorflow_backend as tb
-from keras.layers import Dense,Conv2D,Flatten,Activation,MaxPooling2D
-from keras.preprocessing import image
-from keras.models import load_model
+import tensorflow
+from tensorflow.keras.preprocessing import image
+from tensorflow.keras.models import load_model
 from skimage import transform
 import webscraper as www 
 
-tb._SYMBOLIC_SCOPE.value = True
+app = Flask(__name__,static_folder='static',template_folder='templates')
+model=load_model("model.h5")
+
 
 def processesing(arr):
   for i in arr:
@@ -31,8 +27,6 @@ def images(img):
     image_read.append(image4)
     img_array=np.asarray(image_read)
     return img_array
-app = Flask(__name__,static_folder='static',template_folder='templates')
-model=load_model("model.h5")
 
 @app.route('/')
 def home():
@@ -82,4 +76,4 @@ def xray():
           return render_template("index.html",total=total,cure=cure,death=death)
       
 if __name__=='__main__':
-    app.run(debug=False,threaded=False)
+    app.run(host='0.0.0.0',debug=False)
