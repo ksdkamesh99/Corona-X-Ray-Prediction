@@ -15,7 +15,11 @@ Pillow==7.1.1
 scikit-image==0.16.2
 scikit-learn==0.22.2.post1
 scipy==1.4.1
-tensorflow==2.1.0
+tensorboard==2.3.0
+tensorboard-plugin-wit==1.7.0
+tensorflow==2.3.0
+tensorflow-estimator==2.3.0
 urllib3==1.25.8
 webencodings==0.5.1
 Werkzeug==1.0.1
+Keras-Preprocessing==1.1.2
