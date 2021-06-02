@@ -19,7 +19,7 @@ tensorboard==2.3.0
 tensorboard-plugin-wit==1.7.0
 tensorflow==2.3.1
 tensorflow-estimator==2.3.0
-urllib3==1.25.8
+urllib3==1.26.5
 webencodings==0.5.1
 Werkzeug==1.0.1
 Keras-Preprocessing==1.1.2
