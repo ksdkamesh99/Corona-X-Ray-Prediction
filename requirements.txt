@@ -17,7 +17,7 @@ scikit-learn==0.22.2.post1
 scipy==1.4.1
 tensorboard==2.3.0
 tensorboard-plugin-wit==1.7.0
-tensorflow==2.3.1
+tensorflow==2.6.4
 tensorflow-estimator==2.3.0
 urllib3==1.25.8
 webencodings==0.5.1
