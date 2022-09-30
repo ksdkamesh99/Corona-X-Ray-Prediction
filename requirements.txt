@@ -4,7 +4,7 @@ h5py==2.10.0
 html5lib==1.0.1
 itsdangerous==1.1.0
 Jinja2==2.11.1
-joblib==0.14.1
+joblib==1.2.0
 Keras==2.3.1
 MarkupSafe==1.1.1
 matplotlib==3.2.1
